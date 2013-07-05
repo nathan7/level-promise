@@ -7,6 +7,13 @@
 
     $ npm install level-promise
 
+## Warning
+
+  At the application level, promises vs callbacks is yours to choose.
+  If you use this in a library that isn't explicitly about promises, I will find you and I will destroy you.
+  Play nice with the rest, use callbacks for your library.
+  If your library works with level-manifest, it'll work with this.
+
 ## Usage
 
   `LevelPromise(db)` (or `LevelPromise.install(db)`, if that suits your tastes) and you're off!
