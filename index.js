@@ -32,4 +32,15 @@ function _install(db, manifest) {
   var sublevels = manifest.sublevels
   for (var sublevelName in sublevels) if (__hop.call(sublevels, sublevelName))
     _install(db.sublevels[sublevelName], sublevels[sublevelName])
+
+  if (typeof db.sublevel == 'function') {
+    var Sublevel = db.sublevel
+    db.sublevel = function(sublevelName) {
+      var existing = __hop.call(sublevels, sublevelName)
+        , sublevel = Sublevel.apply(this, arguments)
+      if (!existing)
+        _install(sublevel, new Manifest(sublevels))
+      return sublevel
+    }
+  }
 }
