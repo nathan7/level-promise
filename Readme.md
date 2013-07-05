@@ -11,6 +11,7 @@
 
   `LevelPromise(db)` (or `LevelPromise.install(db)`, if that suits your tastes) and you're off!
   Every method marked as async by level-manifest will now return a promise when you don't pass it a callback.
+  It recurses into sublevels.
 
 ## License
 

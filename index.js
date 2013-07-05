@@ -1,3 +1,4 @@
+'use strict';
 var Manifest = require('level-manifest')
   , Promise = require('promise')
   , __hop = {}.hasOwnProperty
@@ -6,9 +7,12 @@ exports = module.exports = install
 exports.install = install
 
 function install(db) {
-  var manifest = Manifest(db)
-    , methods = manifest.methods
+  _install(db, new Manifest(db))
+  return db
+}
 
+function _install(db, manifest) {
+  var methods = manifest.methods
   for (var methodName in methods) if (__hop.call(methods, methodName)) {
     var method = methods[methodName]
     if (method.type === 'async')
@@ -24,6 +28,8 @@ function install(db) {
         return methodP.apply(this, arguments)
     }
   }
-  
-  return db
+
+  var sublevels = manifest.sublevels
+  for (var sublevelName in sublevels) if (__hop.call(sublevels, sublevelName))
+    _install(db.sublevels[sublevelName], sublevels[sublevelName])
 }
