@@ -16,7 +16,7 @@ function _install(db, manifest) {
   for (var methodName in methods) if (__hop.call(methods, methodName)) {
     var method = methods[methodName]
     if (method.type === 'async')
-      substitute(methodName, method)
+      substitute(methodName, db[methodName])
   }
 
   function substitute(methodName, method){
