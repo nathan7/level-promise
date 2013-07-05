@@ -2,7 +2,9 @@ var Manifest = require('level-manifest')
   , Promise = require('promise')
   , __hop = {}.hasOwnProperty
 
-exports .install = install
+exports = module.exports = install
+exports.install = install
+
 function install(db) {
   var manifest = Manifest(db)
     , methods = manifest.methods
