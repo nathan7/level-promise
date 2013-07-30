@@ -39,7 +39,7 @@ function _install(db, manifest) {
       var existing = __hop.call(sublevels, sublevelName)
         , sublevel = Sublevel.apply(this, arguments)
       if (!existing)
-        _install(sublevel, new Manifest(sublevels))
+        _install(sublevel, new Manifest(sublevel))
       return sublevel
     }
   }
