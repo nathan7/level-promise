@@ -29,7 +29,7 @@ function _install(db, manifest) {
     }
   }
 
-  var sublevels = manifest.sublevels
+  var sublevels = manifest.sublevels || {}
   for (var sublevelName in sublevels) if (__hop.call(sublevels, sublevelName))
     _install(db.sublevels[sublevelName], sublevels[sublevelName])
 
