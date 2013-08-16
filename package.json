@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "level-manifest": "~1.1.1",
-    "promise": ">=3.2.0<4.0.0"
+    "promise": ">=3.2 <4"
   },
   "repository": {
     "type": "git",
