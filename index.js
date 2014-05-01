@@ -17,6 +17,8 @@ function _install(db, manifest) {
     var method = methods[methodName]
     if (method.type === 'async')
       substitute(methodName, db[methodName])
+    if (method.type === 'object')
+      _install(db[methodName], method)
   }
 
   function substitute(methodName, method){
