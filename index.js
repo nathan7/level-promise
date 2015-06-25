@@ -1,6 +1,6 @@
 'use strict';
 var Manifest = require('level-manifest')
-  , Promise = require('promise')
+  , substitute = require('./substitute')
   , __hop = {}.hasOwnProperty
 
 exports = module.exports = install
@@ -16,19 +16,9 @@ function _install(db, manifest) {
   for (var methodName in methods) if (__hop.call(methods, methodName)) {
     var method = methods[methodName]
     if (method.type === 'async')
-      substitute(methodName, db[methodName])
+      substitute(db, methodName, db[methodName])
     if (method.type === 'object')
       _install(db[methodName], method)
-  }
-
-  function substitute(methodName, method){
-    var methodP = Promise.denodeify(method)
-    db[methodName] = function() {
-      if (typeof arguments[arguments.length - 1] == 'function')
-        method.apply(this, arguments)
-      else
-        return methodP.apply(this, arguments)
-    }
   }
 
   var sublevels = manifest.sublevels || {}
