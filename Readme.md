@@ -1,3 +1,13 @@
+[![travis][travis-image]][travis-url]
+[![dep][dep-image]][dep-url]
+[![npm][npm-image]][npm-url]
+
+[travis-image]: https://img.shields.io/travis/nathan7/level-promise.svg?style=flat
+[travis-url]: https://travis-ci.org/nathan7/level-promise
+[dep-image]: https://img.shields.io/gemnasium/nathan7/level-promise.svg?style=flat
+[dep-url]: https://gemnasium.com/nathan7/level-promise
+[npm-image]: https://img.shields.io/npm/v/level-promise.svg?style=flat
+[npm-url]: https://npmjs.org/package/level-promise
 
 # level-promise
 
