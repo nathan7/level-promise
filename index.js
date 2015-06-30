@@ -7,11 +7,13 @@ exports = module.exports = install
 exports.install = install
 
 function install(db) {
-  _install(db, new Manifest(db))
+  _install(db)
   return db
 }
 
 function _install(db, manifest) {
+  manifest = manifest || new Manifest(db)
+
   var methods = manifest.methods
   for (var methodName in methods) if (__hop.call(methods, methodName)) {
     var method = methods[methodName]
@@ -31,7 +33,7 @@ function _install(db, manifest) {
       var existing = __hop.call(sublevels, sublevelName)
         , sublevel = Sublevel.apply(this, arguments)
       if (!existing)
-        _install(sublevel, new Manifest(sublevel))
+        _install(sublevel)
       return sublevel
     }
   }
