@@ -1,6 +1,6 @@
 {
   "name": "level-promise",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Promise'd LevelUp.",
   "main": "index.js",
   "dependencies": {
