@@ -2,6 +2,7 @@
 var Manifest = require('level-manifest')
   , substitute = require('./substitute')
   , __hop = {}.hasOwnProperty
+  , extraMethods = ['open', 'close']
 
 exports = module.exports = install
 exports.install = install
@@ -22,6 +23,11 @@ function _install(db, manifest) {
     if (method.type === 'object')
       _install(db[methodName], method)
   }
+
+  extraMethods.forEach(function(methodName) {
+    if (!manifest.methods[methodName] && typeof db[methodName] == 'function')
+      substitute(db, methodName, db[methodName])
+  })
 
   var sublevels = manifest.sublevels || {}
   for (var sublevelName in sublevels) if (__hop.call(sublevels, sublevelName))
