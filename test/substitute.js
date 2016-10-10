@@ -13,7 +13,8 @@ describe('substitute', function() {
     , PROMISE_METHOD = sinon.spy()
 
   Promise.denodeify = sinon.stub()
-  Promise.denodeify.returns(PROMISE_METHOD)
+  Promise.denodeify.withArgs(METHOD).returns(PROMISE_METHOD)
+  Promise.denodeify.withArgs(undefined).throws(Error('no method to denodify'))
 
   beforeEach(function() {
     METHOD.reset()
@@ -41,4 +42,11 @@ describe('substitute', function() {
     expect(METHOD.calledOnce).to.be.true
     expect(PROMISE_METHOD.called).to.be.false
   })
+
+  it('does not throw if no method is given', function () {
+    expect(function () {
+      substitute(DB, METHOD_NAME, undefined)
+    }).not.to.throw()
+  })
+
 })

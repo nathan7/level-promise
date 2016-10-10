@@ -4,6 +4,7 @@ var Promise = require('promise')
 exports = module.exports = substitute
 
 function substitute(db, methodName, method) {
+  if (typeof method !== 'function') return
   db[methodName] = _wrap(method, Promise.denodeify(method))
 }
 
